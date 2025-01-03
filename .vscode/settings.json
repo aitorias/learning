@@ -59,7 +59,7 @@
         "**/package-lock.json": true
     },
     "files.trimTrailingWhitespace": true,
-    "git.branchProtection": ["main", "distro", "release/*"],
+    "git.branchProtection": ["distro", "release/*"],
     "git.branchProtectionPrompt": "alwaysCommitToNewBranch",
     "git.branchRandomName.enable": true,
     "git.enableCommitSigning": true,
