@@ -1,0 +1,12 @@
+{
+  "name": "understanding-typescript",
+  "version": "1.0.0",
+  "description": "Understanding TypeScript",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc main.ts"
+  },
+  "author": "Aitor de Diego",
+  "license": "ISC"
+}
