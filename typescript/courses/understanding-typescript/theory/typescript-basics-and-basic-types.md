@@ -303,3 +303,26 @@ enum BooleanLikeHeterogeneousEnum {
 The most flexible type. Is a special type that it can be used whenever we want a **particular value to cause typechecking errors**.
 
 When a value is of type any, **it can access any properties of it** (which will in turn be of type any), call it like a function, assign it to (or from) a value of any type, or pretty much anything else that’s syntactically legal:
+
+## Union types
+
+A union type is a **type formed from two or more other types**, representing values that may be any one of those types. We refer to **each of these types as the union's members**. For example:
+
+```js
+function printId(id: number | string) {
+    console.log("Your ID is: " + id);
+}
+```
+
+The separator of the union members is allowed before the first element
+
+```
+function printTextOrNumberOrBool(
+  textOrNumberOrBool:
+    | string
+    | number
+    | boolean
+) {
+  console.log(textOrNumberOrBool);
+}
+```
