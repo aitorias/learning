@@ -1,44 +1,20 @@
-// Specialized Object Types
-/*
-const person: {
-	name: string;
-	age: number;
-} = {
-	name: 'Aitor',
-	age: 31
-};
-*/
-const person = {
-	name: 'Aitor',
-	age: 31,
-	hobbies: [
-		'Sports',
-		'Gaming'
-	],
-	role: [
-		1,
-		'admin'
-	]
-};
+// Union type example
+function combine(input1: number | string, input2: number | string) {
+	let result: number | string;
 
-let favoriteActivities: string[];
-favoriteActivities = ['Sports'];
+	if (typeof input1 === 'string' || typeof input2 === 'string') {
+		result = input1.toString() + input2.toString();
+	} else {
+		result = input1 + input2;
+	}
 
-/*
-The type of the object is inferred by TypeScript, so we don't need to specify it:
-(property) hobbies: string[]
-
-for property 'role' as a tuple:
-(property) role: (string | number)[]
-*/
-
-console.log(person);
-console.log(person.name);
-
-for (const hobby of person.hobbies) {
-	console.log(hobby);
+	return result;
 }
 
-for (const hobby of person.hobbies) {
-	console.log(hobby.toUpperCase());
-}
+const combinedAges = combine(31, 25);
+
+console.log(combinedAges);
+
+const combinedNames = combine('Aitor', 'Clara');
+
+console.log(combinedNames);
