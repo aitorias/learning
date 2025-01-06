@@ -326,3 +326,33 @@ function printTextOrNumberOrBool(
   console.log(textOrNumberOrBool);
 }
 ```
+
+## Literal Types
+
+Literal types can hold specific values on it. The best example, as we did before, is when assigning a value to a constant. The constant will infer as type its own value. For example:
+
+```js
+const constantString = "Hello World";
+// Because `constantString` can only represent 1 possible string, it
+// has a literal type representation
+// const constantString: "Hello World"
+```
+
+The same for numbers:
+
+```js
+const number = 2;
+// const number: 2
+```
+
+It is also possible to define multiple literal types, for example, in function's arguments:
+
+```js
+function combine(
+    input1: number | string,
+    input2: number | string,
+    resultConversion: "as-number" | "as-text"
+) {
+    // ...
+}
+```
