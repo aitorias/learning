@@ -164,7 +164,7 @@ favoriteActivities = ["Sports"];
 favoriteActivities = ["Sports", 1]; // Will throw an error
 ```
 
-When accessing to each element of the Array, TypeScript will know that each element of the Array will be of the type assigned to that Array. For example, If we have an Array of strings, TypeScript will know that each value will be a string, and it lets to access all methods of the 'string' type.
+When accessing to each element of the Array, TypeScript will know that each element of the Array will be of the **type assigned to that Array**. For example, If we have an Array of strings, TypeScript will know that each value will be a string, and it lets to access all methods of the 'string' type.
 
 ```js
 // When accessing the array of string, TypeScript will infer that each element of that Array will be an string. So TypeScript will know that each value will be a string, and it lets to access all methods of the 'string' type.
@@ -182,7 +182,7 @@ for (const hobby of person.hobbies) {
 
 Format: `[type, type]`. Example: (`[number, number]`)
 
-A tuple is a type that is used to represent a fixed length Array that contains multiple types and where the order in which they are indexed is important. It is important to declare the type as a tuple. For example:
+A tuple is a type that is used to represent a **fixed length Array** that contains **multiple types** and where the order in which **they are indexed** is important. It is important to declare the type as a tuple. For example:
 
 ```js
 const failingResponse = ["Not found", 404];
@@ -224,3 +224,82 @@ person.role[1] = 2; // Will display an error
 
 person.role = [0, "admin", "user"]; // Will display an error
 ```
+
+## Enums
+
+Enums allow developers to define a **set of named constants**. Using enums can make it easier to document intent, or **create a set of distinct cases**. TypeScript provides both **numeric and string-based enums**.
+
+Example:
+
+```js
+enum Role {
+	ADMIN,
+	USER
+}
+
+const person = {
+    name: "Aitor",
+    age: 30,
+    hobbies: ["Sports", "Gaming"],
+    role: Role.ADMIN
+};
+```
+
+### Numeric enums
+
+We can also add a **custom value to a keyword**. Each next keyword **will add one to the default value**. So for example:
+
+```js
+enum Direction {
+  Up = 2,
+  Down,
+  Left,
+  Right,
+}
+
+// Down = 3
+// Left = 4
+// Right = 5
+```
+
+But also, it is possible to assign a **custom value to each keyword**. For example:
+
+```js
+enum Direction {
+  Up = 2,
+  Down = 45,
+  Left = 23,
+  Right = 2,
+}
+```
+
+### String enums
+
+String enums are a similar concept, but have some subtle **runtime differences**. In a string enum, **each member has to be constant-initialized with a string literal**, or with another string enum member. For example:
+
+```js
+enum Direction {
+  Up = "UP",
+  Down = "DOWN",
+  Left = "LEFT",
+  Right = "RIGHT",
+}
+```
+
+### Heterogeneous enums
+
+Technically enums can be mixed with string and numeric members, but it’s not clear why you would ever want to do so:
+
+```js
+enum BooleanLikeHeterogeneousEnum {
+	No = 0,
+	Yes = "YES",
+}
+
+```
+
+## Any
+
+The most flexible type. Is a special type that it can be used whenever we want a **particular value to cause typechecking errors**.
+
+When a value is of type any, **it can access any properties of it** (which will in turn be of type any), call it like a function, assign it to (or from) a value of any type, or pretty much anything else that’s syntactically legal:
