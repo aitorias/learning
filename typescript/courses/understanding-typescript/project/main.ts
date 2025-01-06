@@ -1,27 +1,44 @@
-const number1 = 5;
-const number2 = 2.8;
-const printResult = true;
-const resultPhrase = 'Result is: ';
+// Specialized Object Types
+/*
+const person: {
+	name: string;
+	age: number;
+} = {
+	name: 'Aitor',
+	age: 31
+};
+*/
+const person = {
+	name: 'Aitor',
+	age: 31,
+	hobbies: [
+		'Sports',
+		'Gaming'
+	],
+	role: [
+		1,
+		'admin'
+	]
+};
 
-function add(number1: number, number2: number, showResult: boolean, phrase: string) {
-	// console.log(typeof number1);
-	// console.log(typeof number2);
+let favoriteActivities: string[];
+favoriteActivities = ['Sports'];
 
-	// if (typeof number1 !== 'number' || typeof number2 !== 'number') {
-	// 	throw new Error('Incorrect input!');
-	// }
+/*
+The type of the object is inferred by TypeScript, so we don't need to specify it:
+(property) hobbies: string[]
 
-	// if (typeof number1 === 'number' && typeof number2 === 'number') {
-	// 	return number1 + number2;
-	// }
+for property 'role' as a tuple:
+(property) role: (string | number)[]
+*/
 
-	const result = number1 + number2;
+console.log(person);
+console.log(person.name);
 
-	if (showResult) {
-		console.log(phrase + result);
-	} else {
-		return result;
-	}
+for (const hobby of person.hobbies) {
+	console.log(hobby);
 }
 
-add(number1, number2, printResult, resultPhrase);
+for (const hobby of person.hobbies) {
+	console.log(hobby.toUpperCase());
+}
