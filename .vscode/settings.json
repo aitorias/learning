@@ -83,6 +83,5 @@
     "typescript.preferences.quoteStyle": "single",
     "typescript.tsc.autoDetect": "off",
     "typescript.tsdk": "node_modules/typescript/lib",
-    "workbench.colorTheme": "Default Dark Modern",
-    "workbench.iconTheme": "symbols"
+    "workbench.colorTheme": "Default Light Modern",
 }
