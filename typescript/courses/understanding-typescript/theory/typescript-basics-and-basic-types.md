@@ -101,8 +101,8 @@ const person: {
     name: string,
     age: number,
 } = {
-    name: "Max",
-    age: 24,
+    name: "Aitor",
+    age: 31,
 };
 ```
 
@@ -355,4 +355,120 @@ function combine(
 ) {
     // ...
 }
+```
+
+## Type aliases / Custom types
+
+It is also possible to define custom types with the `type` keyword, where is possible to encode more complex definitions. For example:
+
+```javascript
+type Combinable = number | string;
+type ConversionDescriptor = "as-number" | "as-text";
+
+function combine(input1: Combinable, input2: Combinable, resultConversion: ConversionDescriptor)
+```
+
+Even it is possible to create aliases for object types. For example:
+
+```javascript
+type User = {
+	name: string;
+	age: number;
+}
+
+const USER1: User = {
+	name: "Aitor",
+	age: 31
+} // OK
+
+const USER2: User = {
+	name: Aitor,
+	age: "31"
+} // Error
+```
+
+## Function return types & "void"
+
+We can add types for the return of a function. For example
+
+```javascript
+function add(number1: number, number2: number): number {
+	return n1 + n2;
+} // OK
+
+function add(number1: number, number2: number): string {
+	return n1 + n2;
+} // Error
+```
+
+If there is no specific reason for explicity the return type, is it better to let TypeScript infer the return type of a function. Example:
+
+```javascript
+function add(number1: number, number2: number) {
+	return n1 + n2;
+} // OK
+```
+
+If a function does not return anything (like a function that prints a `console.log()`), the function will have `void` as a return type. Example:
+
+```javascript
+function printResult(number: number) {
+	console.log('Result: ' + number);
+}
+
+// Is like
+function printResult(number: number): void {
+	console.log('Result: ' + number)
+}
+```
+
+## Functions as types
+
+Function can also be a type:
+
+```javascript
+function add(number1: number, number2: number) {
+	return number1 + number2;
+}
+
+let variable: Function;
+
+variable = add; // OK
+
+variable = 23; // Error
+
+console.log(variable(1, 2));
+```
+
+And we can make more complex type assignment, like this example:
+
+```javascript
+let variable: () => number; // This variable accepts any function that has no parameters and return a number.
+
+function test1(number1: number) {
+	return number1 + 2;
+} // ERROR
+
+function test2() {
+	return 2 * 2;
+} // OK
+
+function test3() {
+	return "3";
+} // ERROR
+```
+
+## Function types & Callbacks
+
+We can also pass a callback function as an argument of a function that accepts specified types:
+
+```javascript
+function addAndHandle(number1: number, number2: number, callback: (number: number) => void) {
+	const result = number1 + number2;
+	callback(result);
+}
+
+addAndHandle(2, 4, (result) => {
+	console.log(result); // prints 8
+});
 ```
