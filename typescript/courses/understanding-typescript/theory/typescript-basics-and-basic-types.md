@@ -472,3 +472,12 @@ addAndHandle(2, 4, (result) => {
 	console.log(result); // prints 8
 });
 ```
+
+## "Unknown" type
+
+A new type introduced by TypeScript. It is **possible to store any value** (number, string, etc.) without getting errors.
+
+```javascript
+let userInput: unknown;
+```
+
