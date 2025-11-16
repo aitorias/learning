@@ -1,0 +1,16 @@
+{
+  "name": "javascript-testing",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "vitest",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.2.2",
+    "vitest": "^4.0.9"
+  }
+}
