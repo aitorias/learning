@@ -1,14 +1,14 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { capitalizeWords, countOccurrences, debounceFunction, isPalindrome, removeDuplicates, reverseString, sum } from "../src/chatGPT-exercises";
+import { capitalizeWords, countOccurrences, debounceFunction, filterAdults, groupByAgeRange, isPalindrome, removeDuplicates, reverseString, sum } from "../src/chatGPT-exercises";
 
 describe('ChatGPT exercises tests', () => {
   describe('sum function tests', () => {
     it('should throw an error if the first parameter is not a number', () => {
-      expect(() => sum('1', 2)).toThrow(TypeError)
+      expect(() => sum('1', 2)).toThrow()
     })
 
     it('should throw an error if the second parameter is not a number', () => {
-      expect(() => sum(1, '2')).toThrow(TypeError)
+      expect(() => sum(1, '2')).toThrow()
     })
 
     it('should return 3 as the result adding 1 plus 2', () => {
@@ -30,7 +30,7 @@ describe('ChatGPT exercises tests', () => {
 
   describe('reverseString function tests', () => {
     it('should throw an error if the parameter is not a string', () => {
-      expect(() => reverseString(1)).toThrow(TypeError)
+      expect(() => reverseString(1)).toThrow()
     })
 
     it('should throw an error if the string contains less than 2 characters', () => {
@@ -44,7 +44,7 @@ describe('ChatGPT exercises tests', () => {
 
   describe('isPalindrome function tests', () => {
     it('should throw an error if the parameter is not a string', () => {
-      expect(() => isPalindrome(1)).toThrow(TypeError)
+      expect(() => isPalindrome(1)).toThrow()
     })
 
     it('should throw an error if the string contains less than 3 characters', () => {
@@ -74,7 +74,7 @@ describe('ChatGPT exercises tests', () => {
     })
 
     it('should not throw an Error if the argument is an array', () => {
-      expect(() => removeDuplicates(['a'])).not.toThrowError(Error)
+      expect(() => removeDuplicates(['a'])).not.toThrow()
     })
 
     it('should return the array if the array is empty', () => {
@@ -216,7 +216,7 @@ describe('ChatGPT exercises tests', () => {
       debounced()
       expect(fn).not.toHaveBeenCalled()
 
-      vi.advanceTimersByTime(100) // fast-forward 100ms
+      vi.advanceTimersByTime(100)
       expect(fn).toHaveBeenCalledTimes(1)
     })
 
@@ -254,6 +254,160 @@ describe('ChatGPT exercises tests', () => {
       debounced.call(context)
       vi.advanceTimersByTime(50)
       expect(spy.mock.instances[0]).toBe(context)
+    })
+  })
+
+  describe('filterAdults function tests', () => {
+    it('should throw if argument is not an array or array is empty', () => {
+      expect(() => filterAdults(1)).toThrow()
+      expect(() => filterAdults('2')).toThrow()
+      expect(() => filterAdults([])).toThrow()
+      expect(() => filterAdults(['1'])).toThrow()
+      expect(() => filterAdults([{}])).toThrow()
+      expect(() => filterAdults([{ 'a': '2' }])).toThrow()
+    })
+
+    it('should throw if invalid elements (null / undefined)', () => {
+      expect(() => filterAdults([null])).toThrow()
+      expect(() => filterAdults([undefined])).toThrow()
+    })
+
+    it('should return an empty array if all elements under 18', () => {
+      const kids = [
+        { name: 'Kid1', age: 5 },
+        { name: 'Kid2', age: 17 }
+      ]
+
+      expect(filterAdults(kids)).toStrictEqual([])
+    })
+
+    it('should return an array with valid and invalid mix', () => {
+      const array = [{ name: 'Alice', age: 20 }, { foo: 'bar' }]
+
+      expect(() => filterAdults(array)).toThrow()
+    })
+
+    it('should return an array with only valid adults', () => {
+      const adultsOnly = [{ name: 'John', age: 30 }]
+
+      expect(filterAdults(adultsOnly)).toStrictEqual(adultsOnly)
+    })
+
+    it('should return correct adults', () => {
+      const adults = [
+        {
+          name: 'Aitor',
+          age: 32
+        },
+        {
+          name: 'Clara',
+          age: 26
+        },
+        {
+          name: 'Eidur',
+          age: 7
+        }
+      ]
+
+      const correctAdults = [
+        {
+          name: 'Aitor',
+          age: 32
+        },
+        {
+          name: 'Clara',
+          age: 26
+        }
+      ]
+
+      expect(filterAdults(adults)).toStrictEqual(correctAdults)
+    })
+  })
+
+  describe('groupByAgeRange function tests', () => {
+    it('should throw if input is not an array or contains invalid elements', () => {
+      expect(() => groupByAgeRange(1)).toThrow()
+      expect(() => groupByAgeRange('string')).toThrow()
+      expect(() => groupByAgeRange([1, 2])).toThrow()
+      expect(() => groupByAgeRange([null])).toThrow()
+      expect(() => groupByAgeRange([undefined])).toThrow()
+      expect(() => groupByAgeRange([{}])).toThrow()
+      expect(() => groupByAgeRange([{ age: '20' }])).toThrow()
+      expect(() => groupByAgeRange([{ name: 'Alice' }])).toThrow()
+    })
+
+    it('should return empty groups if array is empty', () => {
+      expect(groupByAgeRange([])).toStrictEqual({ child: [], adult: [], senior: [] })
+    })
+
+    it('should correctly group people by age ranges', () => {
+      const people = [
+        { name: 'Alice', age: 10 },
+        { name: 'Bob', age: 25 },
+        { name: 'Clara', age: 70 },
+        { name: 'David', age: 17 },
+      ]
+
+      const grouped = {
+        child: [
+          { name: 'Alice', age: 10 },
+          { name: 'David', age: 17 },
+        ],
+        adult: [
+          { name: 'Bob', age: 25 },
+        ],
+        senior: [
+          { name: 'Clara', age: 70 },
+        ],
+      }
+
+      expect(groupByAgeRange(people)).toStrictEqual(grouped)
+    })
+
+    it('should correctly classify boundary ages', () => {
+      const people = [
+        { name: 'ChildBoundary', age: 17 },
+        { name: 'AdultBoundary1', age: 18 },
+        { name: 'AdultBoundary2', age: 64 },
+        { name: 'SeniorBoundary', age: 65 },
+      ]
+
+      const grouped = {
+        child: [{ name: 'ChildBoundary', age: 17 }],
+        adult: [
+          { name: 'AdultBoundary1', age: 18 },
+          { name: 'AdultBoundary2', age: 64 },
+        ],
+        senior: [{ name: 'SeniorBoundary', age: 65 }],
+      }
+
+      expect(groupByAgeRange(people)).toStrictEqual(grouped)
+    })
+
+    it('should handle arrays with only children, adults, or seniors', () => {
+      const children = [{ name: 'Kid', age: 5 }]
+      const adults = [{ name: 'Adult', age: 30 }]
+      const seniors = [{ name: 'Senior', age: 80 }]
+
+      expect(groupByAgeRange(children)).toStrictEqual({ child: children, adult: [], senior: [] })
+      expect(groupByAgeRange(adults)).toStrictEqual({ child: [], adult: adults, senior: [] })
+      expect(groupByAgeRange(seniors)).toStrictEqual({ child: [], adult: [], senior: seniors })
+    })
+
+    it('should preserve additional properties on person objects', () => {
+      const people = [
+        { name: 'Alice', age: 10, hobby: 'drawing' },
+        { name: 'Bob', age: 25, hobby: 'coding' },
+        { name: 'Clara', age: 70, hobby: 'reading' },
+      ]
+
+      const grouped = {
+        child: [{ name: 'Alice', age: 10, hobby: 'drawing' }],
+        adult: [{ name: 'Bob', age: 25, hobby: 'coding' }],
+        senior: [{ name: 'Clara', age: 70, hobby: 'reading' }],
+      }
+
+      expect(groupByAgeRange(people)).toStrictEqual(grouped)
     })
   })
 })

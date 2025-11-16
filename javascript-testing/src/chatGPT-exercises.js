@@ -99,3 +99,49 @@ export function debounceFunction(theFunction, delay) {
     }, delay)
   }
 }
+
+/**
+ * Implement:
+ * Write a function called filterAdults that takes an array of people objects and returns a new array containing only the people who are 18 or older.
+ */
+export function filterAdults(arrayOfAdults) {
+  if (!Array.isArray(arrayOfAdults)) throw new TypeError('The argument must be an array')
+  if (arrayOfAdults.length === 0) throw new Error('Array is empty')
+
+  const elementsValidation = arrayOfAdults.every((element) => typeof element === "object" && element !== null && 'age' in element && typeof element?.age === "number")
+
+  if (!elementsValidation) throw new Error('Each element must be a person object with an age property')
+
+  return arrayOfAdults.filter((adult) => adult.age >= 18)
+}
+
+/**
+ * Implement:
+ * Write a function called groupByAgeRange that takes an array of people objects (like before, each with a name and age) and returns an object that groups people by these age ranges:
+ * "child" → 0–17
+ * "adult" → 18–64
+ * "senior" → 65+
+ */
+export function groupByAgeRange(arrayOfPeople) {
+  if (!Array.isArray(arrayOfPeople)) throw new TypeError('The argument must be an array')
+  if (arrayOfPeople.length === 0) return { child: [], adult: [], senior: [] }
+
+  const elementsValidation = arrayOfPeople.every((element) => typeof element === "object" && element !== null && 'age' in element && typeof element?.age === "number")
+
+  if (!elementsValidation) throw new Error('Each element must be a person object with an age property')
+
+  function getAgeGroup(age) {
+    if (age <= 17) return 'child';
+    else if (age <= 64) return 'adult';
+    else return 'senior';
+
+  }
+
+  return arrayOfPeople.reduce((groupPeople, currentPerson) => {
+    const personGroup = getAgeGroup(currentPerson.age)
+
+    groupPeople[personGroup].push(currentPerson)
+
+    return groupPeople
+  }, { child: [], adult: [], senior: [] })
+}
