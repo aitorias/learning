@@ -1,87 +1,88 @@
 {
-    "application.experimental.rendererProfiling": true,
-    "breadcrumbs.enabled": false,
-    "console-ninja.featureSet": "Community",
-    "css.format.spaceAroundSelectorSeparator": true,
-    "debug.javascript.terminalOptions": {
-        "outFiles": [
-            "${workspaceFolder}/out/**/*.js",
-            "${workspaceFolder}/build/**/*.js"
-        ]
-    },
-    "editor.cursorBlinking": "expand",
-    "editor.cursorSmoothCaretAnimation": "on",
-    "editor.detectIndentation": false,
-    "editor.experimental.asyncTokenization": true,
-    "editor.experimental.asyncTokenizationVerification": true,
-    "editor.fontFamily": "'Cascadia Code PL', Consolas, 'Courier New', monospace",
-    "editor.fontLigatures": false,
-    "editor.fontSize": 14,
-    "editor.formatOnSave": true,
-    "editor.guides.bracketPairs": true,
-    "editor.guides.bracketPairsHorizontal": false,
-    "editor.linkedEditing": true,
-    "editor.occurrencesHighlightDelay": 0,
-    "editor.stickyScroll.enabled": true,
-    "editor.tabSize": 4,
-    "[css]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[github-issues]": {
-        "editor.wordWrap": "on"
-    },
-    "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[javascript]": {
-        "editor.defaultFormatter": "vscode.typescript-language-features",
-        "editor.formatOnSave": true
-    },
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[plaintext]": {
-        "files.insertFinalNewline": false
-    },
-    "[typescript]": {
-        "editor.defaultFormatter": "vscode.typescript-language-features",
-        "editor.formatOnSave": true
-    },
-    "emmet.excludeLanguages": [],
-    "eslint.useFlatConfig": true,
-    "files.insertFinalNewline": true,
-    "files.readonlyInclude": {
-        "**/node_modules/**/*.*": true,
-        "**/yarn.lock": true,
-        "**/package-lock.json": true
-    },
-    "files.trimTrailingWhitespace": true,
-    "git.branchProtection": ["distro", "release/*"],
-    "git.branchProtectionPrompt": "alwaysCommitToNewBranch",
-    "git.branchRandomName.enable": true,
-    "git.enableCommitSigning": true,
-    "git.ignoreLimitWarning": true,
-    "git.mergeEditor": true,
-    "git.pullBeforeCheckout": true,
-    "githubPullRequests.assignCreated": "${user}",
-    "githubPullRequests.defaultMergeMethod": "squash",
-    "githubPullRequests.experimental.createView": true,
-    "githubPullRequests.ignoredPullRequestBranches": ["main"],
-    "prettier.tabWidth": 4,
-    "remote.autoForwardPortsSource": "hybrid",
-    "symbols.hidesExplorerArrows": false,
-    "terminal.integrated.cursorBlinking": true,
-    "terminal.integrated.env.linux": {},
-    "terminal.integrated.env.windows": {},
-    "terminal.integrated.fontFamily": "'Cascadia Code PL'",
-    "typescript.enablePromptUseWorkspaceTsdk": true,
-    "typescript.experimental.expandableHover": true,
-    "typescript.preferences.importModuleSpecifier": "relative",
-    "typescript.preferences.quoteStyle": "single",
-    "typescript.tsc.autoDetect": "off",
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "workbench.colorTheme": "Default Light Modern",
+  "application.experimental.rendererProfiling": true,
+  "breadcrumbs.enabled": false,
+  "console-ninja.featureSet": "Community",
+  "css.format.spaceAroundSelectorSeparator": true,
+  "debug.javascript.terminalOptions": {
+    "outFiles": [
+      "${workspaceFolder}/out/**/*.js",
+      "${workspaceFolder}/build/**/*.js"
+    ]
+  },
+  "editor.cursorBlinking": "expand",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.detectIndentation": false,
+  "editor.experimental.asyncTokenization": true,
+  "editor.experimental.asyncTokenizationVerification": true,
+  "editor.fontFamily": "'Cascadia Code PL', Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": false,
+  "editor.fontSize": 14,
+  "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": true,
+  "editor.guides.bracketPairsHorizontal": false,
+  "editor.linkedEditing": true,
+  "editor.occurrencesHighlightDelay": 0,
+  "editor.stickyScroll.enabled": true,
+  "editor.tabSize": 2,
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[github-issues]": {
+    "editor.wordWrap": "on"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[plaintext]": {
+    "files.insertFinalNewline": false
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "editor.formatOnSave": true
+  },
+  "emmet.excludeLanguages": [],
+  "eslint.useFlatConfig": true,
+  "files.insertFinalNewline": true,
+  "files.readonlyInclude": {
+    "**/node_modules/**/*.*": true,
+    "**/yarn.lock": true,
+    "**/package-lock.json": true
+  },
+  "files.trimTrailingWhitespace": true,
+  "git.branchProtection": [
+    "distro",
+    "release/*"
+  ],
+  "git.branchProtectionPrompt": "alwaysCommitToNewBranch",
+  "git.branchRandomName.enable": true,
+  "git.enableCommitSigning": true,
+  "git.ignoreLimitWarning": true,
+  "git.mergeEditor": true,
+  "git.pullBeforeCheckout": true,
+  "githubPullRequests.assignCreated": "${user}",
+  "githubPullRequests.defaultMergeMethod": "squash",
+  "githubPullRequests.ignoredPullRequestBranches": [
+    "main"
+  ],
+  "prettier.tabWidth": 4,
+  "remote.autoForwardPortsSource": "hybrid",
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.env.linux": {},
+  "terminal.integrated.env.windows": {},
+  "terminal.integrated.fontFamily": "'Cascadia Code PL'",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.tsc.autoDetect": "off",
+  "typescript.tsdk": "node_modules/typescript/lib",
 }
