@@ -81,3 +81,21 @@ export function capitalizeWords(string) {
   }).join(' ')
 }
 
+/**
+ * Implement:
+ * Write a function debounceFunction(theFunction, delay) that returns a debounced version of function.
+ */
+export function debounceFunction(theFunction, delay) {
+  if (typeof theFunction !== "function") throw new Error('First argument must be a function')
+  if (typeof delay !== "number") throw new Error('Second argument must be a number')
+
+  let timeoutID
+
+  return function (...args) {
+    clearTimeout(timeoutID)
+
+    timeoutID = setTimeout(() => {
+      theFunction.apply(this, args)
+    }, delay)
+  }
+}

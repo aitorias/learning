@@ -1,5 +1,5 @@
-import { describe, expect, it, test } from "vitest";
-import { capitalizeWords, countOccurrences, isPalindrome, removeDuplicates, reverseString, sum } from "../src/chatGPT-exercises";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { capitalizeWords, countOccurrences, debounceFunction, isPalindrome, removeDuplicates, reverseString, sum } from "../src/chatGPT-exercises";
 
 describe('ChatGPT exercises tests', () => {
   describe('sum function tests', () => {
@@ -189,4 +189,71 @@ describe('ChatGPT exercises tests', () => {
     })
   })
 
+  describe('debounceFunction tests', () => {
+    beforeEach(() => {
+      vi.useFakeTimers()
+    })
+
+    afterEach(() => {
+      vi.clearAllTimers()
+      vi.useRealTimers()
+    })
+
+    it('should throw if first argument is not a function', () => {
+      expect(() => debounceFunction(1, 100)).toThrow()
+      expect(() => debounceFunction('fn', 100)).toThrow()
+    })
+
+    it('should throw if second argument is not a number', () => {
+      expect(() => debounceFunction(() => { }, '100')).toThrow()
+      expect(() => debounceFunction(() => { }, null)).toThrow()
+    })
+
+    it('should call the original function after the delay', () => {
+      const fn = vi.fn()
+      const debounced = debounceFunction(fn, 100)
+
+      debounced()
+      expect(fn).not.toHaveBeenCalled()
+
+      vi.advanceTimersByTime(100) // fast-forward 100ms
+      expect(fn).toHaveBeenCalledTimes(1)
+    })
+
+    it('should only call the original function once for rapid calls', () => {
+      const fn = vi.fn()
+      const debounced = debounceFunction(fn, 100)
+
+      debounced()
+      debounced()
+      debounced()
+      expect(fn).not.toHaveBeenCalled()
+
+      vi.advanceTimersByTime(100)
+      expect(fn).toHaveBeenCalledTimes(1)
+    })
+
+    it('should call the original function with latest arguments', () => {
+      const fn = vi.fn()
+      const debounced = debounceFunction(fn, 100)
+
+      debounced(1)
+      debounced(2)
+      debounced(3)
+
+      vi.advanceTimersByTime(100)
+      expect(fn).toHaveBeenCalledWith(3)
+    })
+
+    it('should preserve `this` context', () => {
+      const context = { x: 42 }
+      function fn() { return this.x }
+      const spy = vi.fn(fn)
+      const debounced = debounceFunction(spy, 50)
+
+      debounced.call(context)
+      vi.advanceTimersByTime(50)
+      expect(spy.mock.instances[0]).toBe(context)
+    })
+  })
 })
